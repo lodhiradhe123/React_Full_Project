@@ -4,11 +4,21 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const submitData = () => {
-    console.log("Data submitted", name, email, password);
-    setName("");
-    setEmail("");
-    setPassword("");
+
+  const submitData = async () => {
+    // console.log("Data submitted", name, email, password);
+    let result = await fetch("http://localhost:3000/user", {
+      method: "post",
+      body: JSON.stringify({ name, email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+
+    console.log(result);
+
+    
   };
   return (
     <div className="">
