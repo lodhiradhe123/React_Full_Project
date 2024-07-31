@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -37,7 +37,7 @@ function SignUp() {
       .then((result) => {
         console.log(result);
         // to store the data in borwse's local storage use this...
-        localStorage.setItem("user", JSON.stringify(result));
+        localStorage.setItem("user", JSON.stringify(result.data));
         // ....
         navigate("/");
       })
@@ -73,7 +73,7 @@ function SignUp() {
         <input
           type="submit"
           onClick={submitData}
-          className="w-1/3 m-auto px-4 py-2 border bg-blue-500 hover:bg-blue-700 hover:text-white"
+          className="w-1/3 m-auto px-4 py-2 border bg-blue-500 hover:bg-blue-700 hover:text-white mt-5 rounded"
         />
       </div>
     </div>

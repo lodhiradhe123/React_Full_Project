@@ -1,9 +1,9 @@
-import React from "react";
 import Nav from "./Nav";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import SignUp from "./components/SignUp";
 import PrivateComponent from "./components/PrivateComponent";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -19,6 +19,8 @@ function App() {
           <Route path="/profile" element={<h1>Profile</h1>} />
         </Route>
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login/>} />
+
       </Routes>
       <Footer />
     </>
