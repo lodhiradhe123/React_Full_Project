@@ -1,12 +1,19 @@
-import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/");
+    }
+  });
 
   const submitData = async () => {
     // console.log("Data submitted", name, email, password);
@@ -21,22 +28,22 @@ function SignUp() {
 
     // console.log(result);
     // navigate('/')
-    axios.post("http://localhost:3000/user",{
-      name,
-      email,
-      password
-
-    }).then((result )=>{
-      console.log(result)
-      // to store the data in borwse's local storage use this...
-      localStorage.setItem("user", JSON.stringify(result));
-      // ....
-      navigate('/')
-    }).catch((error) => {
-      console.log(error);
-    });
-
-    
+    axios
+      .post("http://localhost:3000/user", {
+        name,
+        email,
+        password,
+      })
+      .then((result) => {
+        console.log(result);
+        // to store the data in borwse's local storage use this...
+        localStorage.setItem("user", JSON.stringify(result));
+        // ....
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="">
