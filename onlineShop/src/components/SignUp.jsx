@@ -1,22 +1,40 @@
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const submitData = async () => {
     // console.log("Data submitted", name, email, password);
-    let result = await fetch("http://localhost:3000/user", {
-      method: "post",
-      body: JSON.stringify({ name, email, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    result = await result.json();
+    // let result = await fetch("http://localhost:3000/user", {
+    //   method: "post",
+    //   body: JSON.stringify({ name, email, password }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // result = await result.json();
 
-    console.log(result);
+    // console.log(result);
+    // navigate('/')
+    axios.post("http://localhost:3000/user",{
+      name,
+      email,
+      password
+
+    }).then((result )=>{
+      console.log(result)
+      // to store the data in borwse's local storage use this...
+      localStorage.setItem("user", JSON.stringify(result));
+      // ....
+      navigate('/')
+    }).catch((error) => {
+      console.log(error);
+    });
 
     
   };
